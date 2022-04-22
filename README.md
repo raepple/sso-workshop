@@ -8,7 +8,7 @@ Make sure you meet the following prerequisites for the best workshop experience:
 
 * Install SAP GUI on your local workstation and configure the connection to the SAP backend system (IP `20.105.160.186`, SID `A4H`) used in the workshop with the following parameters:
 
-![](images\saplogonconfig.png)
+![](images/saplogonconfig.png)
 
 * *Optional*: Configure name resolution of the SAP backend's FQDN in your local hosts file by adding the following line: 
 ```
@@ -55,8 +55,9 @@ Make sure you have a team number (1-10) assigned before starting with the exerci
 
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
-| 1    | Login to the SAP backend system with user DEVELOPER. Use the client assigend to your team (001...010). | ![](images/0001.png)   |
-| 2    | lorem ipsum |    |
+| 1    | Login to the SAML2 configuration of the [SAP backend system](https://vhcala4hcs.bestrun.corp:50001/sap/bc/webdynpro/sap/saml2) with user DEVELOPER. Use the client assigend to your team (001...010). **Note**: If have *not* maintained your local name resolution as described above, use this [URL](https://20.105.160.185:50001/sap/bc/webdynpro/sap/saml2) and confirm the security warning in your browser. | ![](images/0001.png) |
+| 2    | Select the Trusted Providers tab | ![](images/0002.png)   |
+| 3    | |            |
 
 ### Exercise 2: Setup the OAuth Client for the Chatbot in the SAP backend system
 
