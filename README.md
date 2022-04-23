@@ -53,23 +53,51 @@ You will implement the exercises of the hands-on lab in an isolated team environ
 Make sure you have a team number (1-10) assigned before starting with the exercises. Ask your instructor for help if needed.
 ### Exercise 1: Configure trust between Azure AD and the SAP backend system
 
+Start the implementation by setting up the required trust relationship between the business user's Azure AD tenant and the SAP backend system. Without this trust relationship, the SAP system would reject the SAML assertion issued by Azure AD and seamless single sign-on fails in the scenario.
+
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
-| 1    | Login to the SAML2 configuration of the [SAP backend system](https://vhcala4hcs.bestrun.corp:50001/sap/bc/webdynpro/sap/saml2) with user DEVELOPER. Use the client assigend to your team (001...010). **Note**: If have *not* maintained your local name resolution as described above, use this [URL](https://20.105.160.185:50001/sap/bc/webdynpro/sap/saml2) and confirm the security warning in your browser. | ![](images/0001.png) |
-| 2    | Select the Trusted Providers tab | ![](images/0002.png)   |
-| 3    | |            |
+| 1 | Open a browser and login to the SAML2 configuration of the [SAP backend system](https://vhcala4hcs.bestrun.corp:50001/sap/bc/webdynpro/sap/saml2) with user DEVELOPER. Use the client assigend to your team (001...010). **Note**: If have *not* maintained your local name resolution as described above, use this [URL](https://20.105.160.185:50001/sap/bc/webdynpro/sap/saml2) and confirm the security warning in your browser. | ![](images/0001.png) |
+| 2 | Select the Trusted Providers tab. | ![](images/0002.png)   |
+| 3 | Select **OAuth 2.0 Identity Providers** from the drop-down list. | ![](images/0003.png)   |
+| 4 | Choose Add -> Upload Metadata File. | ![](images/0004.png) |
+| 5 | Open a new tab in the browser and login as user teamX@bestruncorp.onmicrosoft.com to the [Azure AD admin center](https://aad.portal.azure.com). Select **Enterprise Applications** from the navigation menu. | ![](images/0005.png)  |   
+| 6 | Select the application **ABAP 1909 A4H CAL 00n** (with **n** replaced by your team number) from the list. | ![](images/0006.png)   |
+| 7 | Select **Single sign-on** from the navigation menu and click on the **Download** link next to the label **Federation Metadata XML**. Store the metadata file on your local workstation. Repeat the step and download the **Certificate (Raw)** file as well. | ![](images/0007.png)   |
+| 8 | Go back to the previous browser tab and upload the Azure AD federation metadata file (`ABAP 1909 A4H CAL 00n.xml`). Click **Next**. | ![](images/0008.png)     |
+| 9 | Select the option **Upload from file** and upload the raw certificate file (`ABAP 1909 A4H CAL 00n.cer`). Click **Next**.| ![](images/0009.png) |
+| 10 | Click **Next**. | ![](images/0010.png)   |
+| 11 | Click **Finish**. | ![](images/0011.png)   |
+| 12 | Click **Edit**. | ![](images/0012.png)  |
+| 13 | Under *Supported NameID Formats* click **Add**. | ![](images/0013.png) |
+| 14 | Select *E-mail* from the list. Click **Ok**.| ![](images/0014.png)   |
+| 15 | Click **Save** | ![](images/0015.png)   |
+| 16 | Click **Enable** and confirm with **Ok**.| ![](images/0016.png)   |
+
+You have now successfully established the trust relationship. For exchanging the SAML assertion into an OAuth access token, the SAP backend system also requires OAuth client credentials (a client id and secret) to authorize the calling system (i.e. the chatbot) to act on behalf of the user. OAuth client credentials are bound to a system user in the SAP backend which will be created next. 
 
 ### Exercise 2: Setup the OAuth Client for the Chatbot in the SAP backend system
 
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
-| 0000 | Lorem ipsum |            |
+| 17 | Open a new tab in the browser. Login with your client (000 ... 010) and user DEVELOPER to the [OAuth2 configuration](https://vhcala4hcs.bestrun.corp:50001/sap/bc/webdynpro/sap/oauth2_config) in the backend system. Click **Create**. **Note**: If have not maintained your local name resolution as described above, use this [URL](https://20.105.160.185:50001/sap/bc/webdynpro/sap/oauth2_config)) and confirm the security warning in your browser.| ![](images/0017.png) |
+| 18 | The system user **CHATBOT** is alread created in the backend system. Select it for the field **OAuth Client ID**. Provide a brief description (e.g. *Chatbot OAuth client*). Click **Next**.| ![](images/0018.png) |
+| 19 | Deselect the option **SSL Client Certificate** in the **Client Authentication** step and click **Next**. | ![](images/0019.png) |
+| 20 | Select the identity provider created in the previous exercise from the list. Click **Next**. | ![](images/0020.png)   |
+| 21 | The SAP backend requires the same scope(s) assigned to the OAuth client as requested by the user. Therefore select the OAuth scope `ZPRODUCTSVIEW_CDS_0001` from value help list. This scope has been created with the deployment of the [Core Data Services (CDS) view](https://github.com/raepple/azure-scp-principal-propagation/blob/part3/SAPGateway/zproductsview.asddls) of the product catalogue search OData service. Click **Next**| ![](images/0021.png)   |
+| 22 | On the summary page, click **Finish** | ![](images/0022.png) |
 
+The backend system is now prepared to support the token exchange from the SAML assertion to an OAuth access token using the *SAML 2.0 Bearer Grant Type*.
 ### Exercise 3: Create the connection in Power Platform for the token exchange flow
+
+The chatbot delegates the token exchange with the SAP system to a flow in [Power Automate](https://powerautomate.microsoft.com/en-us/). You will inspect the chatbot content and conversation logic in the Power Virtual Agents design tool and jump from there to the token exchange flow in Power Automate to configure the connection via the [On-Premise Data Gateway](https://docs.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem).
 
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
-| 0000 | Lorem ipsum |            |
+| 13 | Lorem ipsum |  |
+| 13 | Lorem ipsum |  |
+| 13 | Lorem ipsum |  |
+| 13 | Lorem ipsum |  |
 
 ### Exercise 4: Test the chatbot in Power Virtual Agent web client
 
@@ -77,7 +105,7 @@ Make sure you have a team number (1-10) assigned before starting with the exerci
 | ---- | ----------- | ---------- |
 | 0000 | Lorem ipsum |            |
 
-### Exercise 5: Inspect the SAML assertion sent to the backend system for the token exchange
+### Exercise 5: Inspect the SAML assertion sent to the SAP backend’s OAuth server for the token exchange
 
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
