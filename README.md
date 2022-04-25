@@ -44,7 +44,7 @@ You will group in separate teams (1 to 10) that use the following user accounts 
 | 6    | 006        | DEVELOPER6 | team6@bestruncorp.onmicrosoft.com |
 | 7    | 007        | DEVELOPER7 | team7@bestruncorp.onmicrosoft.com |
 | 8    | 008        | DEVELOPER8 | team8@bestruncorp.onmicrosoft.com |
-| 9    | 008        | DEVELOPER9 | team9@bestruncorp.onmicrosoft.com |
+| 9    | 009        | DEVELOPER9 | team9@bestruncorp.onmicrosoft.com |
 | 10    | 010        | DEVELOPER10 | team10@bestruncorp.onmicrosoft.com |
 
 The instructor will provide the required password credentials for the users in the table above.
