@@ -168,7 +168,7 @@ In this last exercise you will change the user's authorizations in the product c
 
 | Step | Description | Screenshot | 
 | ---- | ----------- | ---------- |
-| 48 | Open SAP Logon pad and login to the backend system. | ![](images/0048.png) |
+| 48 | Open SAP Logon pad and login to the backend system with your client (001-010) and user DEVELOPERx (replace x with the number of your team). | ![](images/0048.png)|
 | 49 | Start the *Role Maintenance* with transaction code "*PFCG*" | ![](images/0049.png)   |
 | 50 | Enter "*PRODUCT_SEARCH*" in the role entry field and click the **Pencil** symbol to go into change mode. | ![](images/0050.png)   |
 | 51 | Click the **Pencil** symbol next to the label *CHange Authorization Data*. | ![](images/0051.png)   |
