@@ -19,7 +19,7 @@ This repository contains the instructions (this file) and supporting material fo
 
 Make sure you meet the following prerequisites for the best workshop experience:
 
-* Install SAP GUI on your local workstation and configure the connection to the SAP backend system (IP `20.105.160.186`, SID `A4H`) used in the workshop with the following parameters:
+* Install SAP GUI on your local workstation and configure the connection to the SAP backend system (IP `20.105.160.185`, SID `A4H`) used in the workshop with the following parameters:
 
 ![](images/saplogonconfig.png)
 
